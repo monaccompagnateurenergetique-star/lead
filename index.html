@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+
+<html lang="fr" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pompe à Chaleur à 990€ | Formulaire d'Éligibilité</title>
+<!-- Chosen Palette: Ocean Blue & Neutral Gray -->
+<link rel="preconnect" href="https://www.google.com/search?q=https://fonts.googleapis.com">
+<link rel="preconnect" href="https://www.google.com/search?q=https://fonts.gstatic.com" crossorigin>
+<link href="https://www.google.com/search?q=https://fonts.googleapis.com/css2%3Ffamily%3DInter:wght%40400%3B500%3B600%3B700%3B800%26display%3Dswap" rel="stylesheet">
+<script src="https://www.google.com/search?q=https://cdn.tailwindcss.com"></script>
+<style>
+body {
+font-family: 'Inter', sans-serif;
+@apply bg-gray-50;
+}
+.simulation-step {
+transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+.step-hidden {
+display: none;
+opacity: 0;
+transform: translateX(20px);
+}
+.step-visible {
+display: block;
+opacity: 1;
+transform: translateX(0);
+}
+.btn-selected {
+@apply bg-blue-500 text-white shadow-lg ring-2 ring-blue-700;
+}
+.step-btn:not(.btn-selected) {
+@apply bg-white text-gray-800;
+}
+.chatbot-container {
+position: fixed;
+bottom: 2rem;
+right: 2rem;
+z-index: 1000;
+width: 350px;
+height: 500px;
+box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+border-radius: 1rem;
+display: flex;
+flex-direction: column;
+overflow: hidden;
+background-color: white;
+}
+#chatbot-toggle {
+position: fixed;
+bottom: 2rem;
+right: 2rem;
+width: 60px;
+height: 60px;
+border-radius: 50%;
+background-color: #0666E1;
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 2rem;
+cursor: pointer;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+transition: all 0.3s ease-in-out;
+z-index: 1001;
+}
+#chatbot-toggle:hover {
+transform: scale(1.1);
+}
+#chatbot-messages {
+flex-grow: 1;
+padding: 1rem;
+overflow-y: auto;
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+}
+.message {
+max-width: 80%;
+padding: 0.75rem;
+border-radius: 0.75rem;
+}
+.user-message {
+background-color: #E5E7EB;
+align-self: flex-end;
+}
+.bot-message {
+background-color: #EBF5FF;
+align-self: flex-start;
+}
+/* Style for FAQ Accordion /
+.faq-item {
+border: 1px solid #E5E7EB;
+border-radius: 0.5rem;
+margin-bottom: 1rem;
+overflow: hidden;
+}
+.faq-question {
+width: 100%;
+padding: 1rem 1.5rem;
+text-align: left;
+font-weight: 600;
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color: white;
+cursor: pointer;
+}
+.faq-answer {
+padding: 0 1.5rem;
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.3s ease-in-out;
+}
+.faq-answer.open {
+max-height: 200px; / Adjust as needed */
+padding: 1rem 1.5rem;
+}
+.faq-icon {
+transition: transform 0.3s ease-in-out;
+}
+.faq-icon.rotate {
+transform: rotate(180deg);
+}
+.testimonial-card {
+@apply bg-white p-6 rounded-lg shadow-md border border-gray-200;
+}
+.testimonial-quote {
+@apply text-lg text-gray-700 italic mb-4;
+}
+.testimonial-author {
+@apply font-semibold text-gray-800;
+}
+.testimonial-location {
+@apply text-sm text-gray-500;
+}
+</style>
+</head>
+<body class="antialiased text-gray-800">
+
+<header class="bg-white py-16 px-4 sm:px-6 lg:px-8 shadow-sm">
+    <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-4 text-blue-800">
+            Installez votre <span class="text-blue-600">Pompe à Chaleur à 990,00 €*</span>
+        </h1>
+        <p class="text-lg sm:text-xl font-light text-gray-600 mb-8">
+            Vérifiez votre éligibilité en 2 minutes et profitez d'un confort thermique optimal.
+        </p>
+        <button id="start-btn" class="bg-blue-600 text-white font-bold py-4 px-12 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+            COMMENCER
+        </button>
+        <p class="text-sm text-gray-500 mt-4">* Sous conditions de ressources, après déduction de l’ensemble des aides financières.</p>
+    </div>
+</header>
+
+<main class="py-16">
+    <!-- New location for the argument block -->
+    <section id="argument-block" class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">Pourquoi choisir une pompe à chaleur ?</h2>
+            <p class="text-lg text-gray-600 mb-12">
+                Un investissement intelligent pour votre confort, la planète et votre portefeuille.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <div class="flex items-center justify-center mb-4">
+                        <svg class="w-12 h-12 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zM6 10a4 4 0 118 0 4 4 0 01-8 0z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM6 10a4 4 0 118 0 4 4 0 01-8 0z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Économies garanties</h3>
+                    <p class="text-gray-600">Réduisez vos factures de chauffage jusqu'à 70 % en utilisant l'énergie naturelle de l'air.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <div class="flex items-center justify-center mb-4">
+                        <svg class="w-12 h-12 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM6.5 9a1 1 0 11-2 0 1 1 0 012 0zM12 9a1 1 0 11-2 0 1 1 0 012 0zM15.5 10a1 1 0 11-2 0 1 1 0 012 0z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM6.5 9a1 1 0 11-2 0 1 1 0 012 0zM12 9a1 1 0 11-2 0 1 1 0 012 0zM15.5 10a1 1 0 11-2 0 1 1 0 012 0z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Geste écologique</h3>
+                    <p class="text-gray-600">Contribuez à la transition énergétique en choisissant une solution qui n'émet pas de gaz à effet de serre.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <div class="flex items-center justify-center mb-4">
+                        <svg class="w-12 h-12 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zM6 10a4 4 0 118 0 4 4 0 01-8 0z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM6 10a4 4 0 118 0 4 4 0 01-8 0z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Aides de l'État</h3>
+                    <p class="text-gray-600">Profitez de subventions comme MaPrimeRénov' ou le CEE pour financer une grande partie de vos travaux.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New testimonials block -->
+    <section id="testimonials-block" class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-100">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-8">Que disent nos clients ?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Depuis l'installation de ma pompe à chaleur, mes factures ont considérablement baissé. Le simulateur a été très précis et m'a aidé à franchir le pas."</p>
+                    <div class="text-right">
+                        <p class="testimonial-author">Marie L.</p>
+                        <p class="testimonial-location">Propriétaire à Lyon</p>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Grâce à cette plateforme, j'ai pu identifier les aides auxquelles j'avais droit pour ma pompe à chaleur. Un gain de temps incroyable et une installation sans accroc."</p>
+                    <div class="text-right">
+                        <p class="testimonial-author">Pierre D.</p>
+                        <p class="testimonial-location">Installation PAC à Nantes</p>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Je suis très satisfait du processus. Le simulateur est clair et les informations sont fiables. L'installation de la pompe à chaleur s'est faite sans surprise."</p>
+                    <div class="text-right">
+                        <p class="testimonial-author">Sophie M.</p>
+                        <p class="testimonial-location">Rénovation globale en Alsace</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New block: simplified path -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-12">
+                Particuliers : Votre parcours simplifié en 3 étapes simples
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-3xl font-bold mb-4">
+                        1
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Définissez votre projet</h3>
+                    <p class="text-gray-600">Quelques questions pour comprendre votre habitation et vos besoins en rénovation.</p>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-3xl font-bold mb-4">
+                        2
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Découvrez vos aides</h3>
+                    <p class="text-gray-600">Notre simulateur analyse votre profil et vous donne un montant précis d'ades éligibles.</p>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-3xl font-bold mb-4">
+                        3
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Réalisez vos travaux</h3>
+                    <p class="text-gray-600">Mettez en œuvre votre projet grâce à notre réseau d'artisans RGE qualifiés.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New block: financing for individuals -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-100">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
+            <div class="rounded-lg shadow-xl overflow-hidden">
+                <img src="https://calculezvosaides.fr/static/media/family3.451b4ca7db46bc47b023.jpg" alt="Une famille souriante dans un logement rénové" class="w-full h-auto object-cover">
+            </div>
+            <div class="text-center lg:text-left">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Particuliers : Financez vos travaux grâce aux aides disponibles</h2>
+                <p class="text-lg text-gray-600 mb-6">
+                    Vous êtes propriétaire occupant ? Découvrez en quelques clics toutes les aides financières auxquelles vous avez droit pour vos travaux de rénovation énergétique.
+                </p>
+                <p class="text-lg font-semibold text-gray-700 mb-6">
+                    Simple, rapide et 100% gratuit : obtenez une estimation personnalisée et maximisez vos économies.
+                </p>
+                <button id="start-btn-2" class="bg-blue-600 text-white font-bold py-4 px-12 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                    Démarrer ma simulation →
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- New FAQ block -->
+    <section id="faq-block" class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-8">Questions fréquemment posées</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Le simulateur est-il vraiment gratuit ?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Oui, notre simulateur est 100% gratuit et sans engagement. Nous ne vous demandons jamais de carte bancaire. Notre modèle économique repose sur la mise en relation avec des artisans RGE, partenaires, uniquement si vous le souhaitez.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Les montants calculés sont-ils fiables ?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Les montants des aides sont des estimations basées sur les critères officiels de l'État. Un conseiller vous contactera pour valider ces montants et vous proposer un devis précis.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Puis-je cumuler plusieurs aides ?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Oui, plusieurs aides peuvent être cumulées pour maximiser le financement de votre projet, sous réserve de respecter les conditions d'éligibilité de chaque dispositif. Un conseiller vous aidera à y voir plus clair.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Mes données sont-elles sécurisées ?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Vos données sont traitées avec la plus grande confidentialité. Elles sont utilisées uniquement pour vérifier votre éligibilité et vous mettre en relation avec un professionnel RGE si vous le souhaitez. Elles ne sont jamais revendues à des tiers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="simulation" class="px-4 sm:px-6 lg:px-8 hidden">
+        <div class="max-w-3xl mx-auto">
+            <div id="simulation-container" class="bg-white p-6 sm:p-8 rounded-lg shadow-xl border border-gray-200">
+                
+                <!-- Progress Bar -->
+                <div class="mb-8">
+                    <div class="relative pt-1">
+                        <div class="flex mb-2 items-center justify-between">
+                            <div>
+                                <span id="progress-text" class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200">
+                                    Étape 1 sur 6
+                                </span>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200">
+                            <div id="progress-bar" style="width:16.66%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600 transition-all duration-500"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Étape 1 : Localisation et type de logement -->
+                <div id="step-1" class="simulation-step step-visible">
+                    <h3 class="text-xl font-semibold mb-6 text-gray-800">1. Où se situe votre logement ?</h3>
+                    <div class="mb-6">
+                        <label for="zip-code" class="block text-gray-700 font-medium mb-2">Code postal</label>
+                        <input type="text" id="zip-code" class="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: 75001" maxlength="5" inputmode="numeric">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-6 text-gray-800">2. Quel est votre type de logement ?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button data-step="1" data-value="maison" data-next-step="2" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            Maison
+                        </button>
+                        <button data-step="1" data-value="appartement" data-next-step="2" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            Appartement
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Étape 2 : Statut de l'occupant -->
+                <div id="step-2" class="simulation-step step-hidden">
+                    <h3 class="text-xl font-semibold mb-6 text-gray-800">3. Quel est votre statut ?</h3>
+                    <div class="grid grid-cols-1 gap-4">
+                        <button data-step="2" data-value="propriétaire-occupant" data-next-step="3" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            Propriétaire occupant
+                        </button>
+                        <button data-step="2" data-value="propriétaire-bailleur" data-next-step="3" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            Propriétaire bailleur
+                        </button>
+                        <button data-step="2" data-value="locataire" data-next-step="3" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            Locataire
+                        </button>
+                    </div>
+                    <button data-prev-step="1" class="previous-step-btn mt-8 text-sm text-gray-500 hover:underline">← Retour</button>
+                </div>
+
+                <!-- Étape 3 : Système de chauffage -->
+                <div id="step-3" class="simulation-step step-hidden">
+                    <h3 class="text-xl font-semibold mb-6 text-gray-800">4. Quel est votre système de chauffage actuel ?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button data-step="3" data-value="fioul" data-next-step="4" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            Chaudière au fioul
+                        </button>
+                        <button data-step="3" data-value="gaz" data-next-step="4" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            Chaudière au gaz
+                        </button>
+                        <button data-step="3" data-value="electrique" data-next-step="4" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            Chauffage électrique
+                        </button>
+                        <button data-step="3" data-value="autre" data-next-step="4" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            Autre
+                        </button>
+                    </div>
+                    <button data-prev-step="2" class="previous-step-btn mt-8 text-sm text-gray-500 hover:underline">← Retour</button>
+                </div>
+                
+                <!-- Étape 4 : Eau chaude et surface -->
+                <div id="step-4" class="simulation-step step-hidden">
+                    <h3 class="text-xl font-semibold mb-6 text-gray-800">5. Votre système de chauffage produit-il également de l'eau chaude sanitaire ?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <button data-step="4-ecs" data-value="oui-ecs" data-next-step="5" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            Oui
+                        </button>
+                        <button data-step="4-ecs" data-value="non-ecs" data-next-step="5" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            Non
+                        </button>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-6 text-gray-800">6. Quelle est la surface à chauffer ?</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <button data-step="4-surface" data-value="-70" data-next-step="5" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            - 70 m²
+                        </button>
+                        <button data-step="4-surface" data-value="70-90" data-next-step="5" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            70 - 90 m²
+                        </button>
+                        <button data-step="4-surface" data-value="90-110" data-next-step="5" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            90 - 110 m²
+                        </button>
+                        <button data-step="4-surface" data-value="110-130" data-next-step="5" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            110 - 130 m²
+                        </button>
+                        <button data-step="4-surface" data-value="+130" data-next-step="5" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            + 130 m²
+                        </button>
+                    </div>
+                    <button data-prev-step="3" class="previous-step-btn mt-8 text-sm text-gray-500 hover:underline">← Retour</button>
+                </div>
+
+                <!-- Étape 5 : Émetteurs de chauffage -->
+                <div id="step-5" class="simulation-step step-hidden">
+                    <h3 class="text-xl font-semibold mb-6 text-gray-800">7. Quel est votre type d'émetteur de chauffage ?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <button data-step="5" data-value="radiateur" data-next-step="6" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            Radiateur
+                        </button>
+                        <button data-step="5" data-value="plancher-chauffant" data-next-step="6" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            Plancher chauffant
+                        </button>
+                        <button data-step="5" data-value="les-deux" data-next-step="6" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            Les deux
+                        </button>
+                    </div>
+                    <button data-prev-step="4" class="previous-step-btn mt-8 text-sm text-gray-500 hover:underline">← Retour</button>
+                </div>
+
+                <!-- Étape 6 : Foyer et revenus -->
+                <div id="step-6" class="simulation-step step-hidden">
+                    <h3 class="text-xl font-semibold mb-6 text-gray-800">8. Combien de personnes composent votre foyer ?</h3>
+                    <div class="grid grid-cols-3 md:grid-cols-6 gap-4 mb-6">
+                        <button data-value="1" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">1</button>
+                        <button data-value="2" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">2</button>
+                        <button data-value="3" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">3</button>
+                        <button data-value="4" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">4</button>
+                        <button data-value="5" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">5</button>
+                        <button data-value="6+" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">6+</button>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-6 text-gray-800">9. Quel est votre revenu fiscal de référence ?</h3>
+                    <div id="income-buttons-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                        <p class="text-gray-500 col-span-full">Veuillez d'abord sélectionner la taille de votre foyer.</p>
+                    </div>
+                    <button id="check-eligibility-btn" class="w-full bg-gray-400 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 cursor-not-allowed" disabled>
+                        Vérifier mon éligibilité
+                    </button>
+                    <button data-prev-step="5" class="previous-step-btn mt-8 text-sm text-gray-500 hover:underline">← Retour</button>
+                </div>
+            </div>
+
+            <!-- Résultat de la simulation -->
+            <div id="simulation-result" class="hidden text-center bg-white p-6 sm:p-8 rounded-lg shadow-xl border border-gray-200">
+                <div id="result-icon" class="text-6xl mb-4"></div>
+                <div id="result-message" class="text-2xl font-bold mb-4"></div>
+                <p class="text-gray-600 mb-8">
+                    Pour valider votre projet et être recontacté, veuillez finaliser votre demande.
+                </p>
+                <button id="show-contact-form-btn" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300">
+                    Finaliser ma demande
+                </button>
+            </div>
+
+            <!-- Formulaire de contact (Lead) -->
+            <div id="contact-form-container" class="hidden mt-12">
+                <div class="max-w-xl mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-xl">
+                    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
+                        Vos coordonnées
+                    </h2>
+                    <form id="lead-form">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="mb-4">
+                                <label for="first-name" class="block text-gray-700 font-medium mb-2">Prénom</label>
+                                <input type="text" id="first-name" class="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="last-name" class="block text-gray-700 font-medium mb-2">Nom</label>
+                                <input type="text" id="last-name" class="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus-ring-blue-500" required>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <!-- Added address field -->
+                        <div class="mb-4">
+                            <label for="address" class="block text-gray-700 font-medium mb-2">Adresse</label>
+                            <input type="text" id="address" class="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">Téléphone</label>
+                            <input type="tel" id="phone" class="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <button type="submit" id="submit-btn" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300">
+                            Envoyer et être recontacté
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Message de succès -->
+            <div id="success-message" class="hidden mt-12 text-center bg-white p-8 rounded-lg shadow-xl">
+                <div class="text-6xl text-blue-500 mb-4">✅</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Demande envoyée !</h2>
+                <p class="text-gray-600">
+                    Merci pour votre confiance. Un conseiller vous recontactera très prochainement pour vous accompagner dans votre projet.
+                </p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Chatbot Container -->
+<div id="chatbot-container" class="hidden chatbot-container">
+    <div class="flex-shrink-0 bg-blue-600 text-white p-4 flex justify-between items-center rounded-t-lg">
+        <h3 class="text-lg font-bold">Assistant Pompe à Chaleur</h3>
+        <button id="close-chatbot" class="text-xl">&times;</button>
+    </div>
+    <div id="chatbot-messages"></div>
+    <div class="flex-shrink-0 p-4 border-t border-gray-200">
+        <input type="text" id="chatbot-input" class="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Posez votre question...">
+    </div>
+</div>
+<button id="chatbot-toggle">💬</button>
+
+<footer class="bg-gray-800 text-white py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto text-center text-sm text-gray-400">
+        <p>&copy; 2025 C ECOLO. Tous droits réservés.</p>
+    </div>
+</footer>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+    let userId = null;
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            userId = user.uid;
+        } else {
+            try {
+                const userCredential = await signInAnonymously(auth);
+                userId = userCredential.user.uid;
+            } catch (error) {
+                console.error("Erreur de connexion anonyme:", error);
+            }
+        }
+    });
+
+    const ELIGIBILITY_CRITERIA = {
+        "default": {
+            "1": { "Très modeste": "<17009", "Modeste": "<21805", "Intermédiaire": "<30549" },
+            "2": { "Très modeste": "<24875", "Modeste": "<31884", "Intermédiaire": "<44907" },
+            "3": { "Très modeste": "<29917", "Modeste": "<38347", "Intermédiaire": "<54071" },
+            "4": { "Très modeste": "<34960", "Modeste": "<44802", "Intermédiaire": "<63235" },
+            "5": { "Très modeste": "<40003", "Modeste": "<51259", "Intermédiaire": "<72399" },
+            "6+": { "Très modeste": "<45046", "Modeste": "<57715", "Intermédiaire": "<81563" }
+        },
+        "20": { // Corse et certains DROM
+             "1": { "Très modeste": "<23781", "Modeste": "<28775", "Intermédiaire": "<41235" }
+        }
+    };
+
+    const selectedData = {};
+    const totalSteps = 6;
+
+    // Show main content after clicking start button
+    document.getElementById('start-btn').addEventListener('click', () => {
+        const simulationSection = document.getElementById('simulation');
+        simulationSection.classList.remove('hidden');
+        simulationSection.scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Handle the new button
+    document.getElementById('start-btn-2').addEventListener('click', () => {
+        const simulationSection = document.getElementById('simulation');
+        simulationSection.classList.remove('hidden');
+        simulationSection.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    function updateProgress(currentStep) {
+        const progress = (currentStep / totalSteps) * 100;
+        document.getElementById('progress-bar').style.width = `${progress}%`;
+        document.getElementById('progress-text').textContent = `Étape ${currentStep} sur ${totalSteps}`;
+    }
+
+    function switchStep(targetStep) {
+        document.querySelectorAll('.simulation-step').forEach(step => {
+            step.classList.add('step-hidden');
+            step.classList.remove('step-visible');
+        });
+        const nextStepElement = document.getElementById(`step-${targetStep}`);
+        if (nextStepElement) {
+            nextStepElement.classList.remove('step-hidden');
+            nextStepElement.classList.add('step-visible');
+            updateProgress(targetStep);
+        }
+    }
+
+    document.querySelectorAll('.step-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const currentStep = button.dataset.step;
+            const nextStep = parseInt(button.dataset.next-step);
+            const value = button.dataset.value;
+
+            if (currentStep === '1') {
+                const zipCodeInput = document.getElementById('zip-code');
+                if (!/^\d{5}$/.test(zipCodeInput.value)) {
+                     showCustomAlert("Veuillez entrer un code postal français valide (5 chiffres).");
+                    return;
+                }
+                selectedData.zipCode = zipCodeInput.value;
+                selectedData.housingType = value;
+            } else if (currentStep === '2') {
+                selectedData.occupantStatus = value;
+            } else if (currentStep === '3') {
+                selectedData.heatingSystem = value;
+            } else if (currentStep === '4-ecs') {
+                selectedData.producesHotWater = value;
+            } else if (currentStep === '4-surface') {
+                selectedData.heatedSurfaceArea = value;
+            } else if (currentStep === '5') {
+                selectedData.emitterType = value;
+            }
+            
+            // Remove selection from siblings for single-choice steps
+            if (currentStep === '1' || currentStep === '2' || currentStep === '3' || currentStep === '5') {
+                button.parentElement.querySelectorAll('.step-btn').forEach(btn => btn.classList.remove('btn-selected'));
+                button.classList.add('btn-selected');
+                setTimeout(() => switchStep(nextStep), 200);
+            } else if (currentStep.startsWith('4-')) { // Handle specific logic for step 4 to allow multiple sections
+                const parentElement = button.parentElement;
+                parentElement.querySelectorAll('.step-btn').forEach(btn => btn.classList.remove('btn-selected'));
+                button.classList.add('btn-selected');
+
+                const ecsSelected = document.querySelector('[data-step="4-ecs"].btn-selected');
+                const surfaceSelected = document.querySelector('[data-step="4-surface"].btn-selected');
+                if (ecsSelected && surfaceSelected) {
+                    setTimeout(() => switchStep(nextStep), 200);
+                }
+            }
+        });
+    });
+
+    document.querySelectorAll('.previous-step-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const prevStep = parseInt(button.dataset.prev-step);
+            switchStep(prevStep);
+        });
+    });
+
+    document.querySelectorAll('.household-size-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            selectedData.householdSize = e.target.dataset.value;
+            document.querySelectorAll('.household-size-btn').forEach(btn => btn.classList.remove('btn-selected'));
+            e.target.classList.add('btn-selected');
+            generateIncomeButtons();
+            checkEligibilityButtonState();
+        });
+    });
+
+    function generateIncomeButtons() {
+        const container = document.getElementById('income-buttons-container');
+        container.innerHTML = '';
+        delete selectedData.incomeBracket;
+
+        const zipCodePrefix = selectedData.zipCode ? selectedData.zipCode.substring(0, 2) : 'default';
+        const criteria = ELIGIBILITY_CRITERIA[zipCodePrefix] || ELIGIBILITY_CRITERIA.default;
+        const sizeCriteria = criteria[selectedData.householdSize];
+
+        if (sizeCriteria) {
+            Object.entries(sizeCriteria).forEach(([bracket, value]) => {
+                const btn = document.createElement('button');
+                btn.className = "income-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300";
+                btn.dataset.value = bracket;
+                btn.textContent = `${bracket} (${value}€)`;
+                btn.onclick = (e) => {
+                    selectedData.incomeBracket = e.target.dataset.value;
+                    document.querySelectorAll('.income-btn').forEach(b => b.classList.remove('btn-selected'));
+                    e.target.classList.add('btn-selected');
+                    checkEligibilityButtonState();
+                };
+                container.appendChild(btn);
+            });
+        }
+    }
+
+    function checkEligibilityButtonState() {
+        const btn = document.getElementById('check-eligibility-btn');
+        if (selectedData.householdSize && selectedData.incomeBracket) {
+            btn.disabled = false;
+            btn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+            btn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+        } else {
+            btn.disabled = true;
+            btn.classList.add('bg-gray-400', 'cursor-not-allowed');
+            btn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+        }
+    }
+    
+    document.getElementById('check-eligibility-btn').addEventListener('click', () => {
+        const isEligible = selectedData.occupantStatus === 'propriétaire-occupant' && selectedData.incomeBracket === 'Très modeste';
+        
+        const resultMessage = document.getElementById('result-message');
+        const resultIcon = document.getElementById('result-icon');
+        
+        if (isEligible) {
+            resultMessage.innerHTML = `Félicitations ! Votre logement est éligible à la <span class="text-blue-600">pompe à chaleur à 990,00 €</span>.`;
+            resultIcon.textContent = '✅';
+        } else {
+            resultMessage.innerHTML = `Malheureusement, vous n'êtes pas éligible à l'offre à 990,00 €. <br> Votre projet nécessite une étude personnalisée.`;
+            resultIcon.textContent = '❌';
+        }
+
+        document.getElementById('simulation-container').classList.add('hidden');
+        document.getElementById('simulation-result').classList.remove('hidden');
+    });
+
+    document.getElementById('show-contact-form-btn').addEventListener('click', () => {
+        document.getElementById('simulation-result').classList.add('hidden');
+        document.getElementById('contact-form-container').classList.remove('hidden');
+    });
+    
+    // Gemini API logic
+    const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=";
+    const apiKey = "";
+    
+    async function callGeminiAPI(prompt) {
+        try {
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+            };
+            const response = await fetch(GEMINI_API_URL + apiKey, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await response.json();
+            const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+            return text || "Désolé, je n'ai pas pu générer de réponse.";
+        } catch (error) {
+            console.error("Erreur lors de l'appel à l'API Gemini:", error);
+            return "Une erreur est survenue lors de la connexion à l'API.";
+        }
+    }
+    
+    // Chatbot logic
+    const chatbotToggle = document.getElementById('chatbot-toggle');
+    const chatbotContainer = document.getElementById('chatbot-container');
+    const chatbotClose = document.getElementById('close-chatbot');
+    const chatbotMessages = document.getElementById('chatbot-messages');
+    const chatbotInput = document.getElementById('chatbot-input');
+
+    chatbotToggle.addEventListener('click', () => {
+        chatbotContainer.classList.toggle('hidden');
+    });
+
+    chatbotClose.addEventListener('click', () => {
+        chatbotContainer.classList.add('hidden');
+    });
+
+    chatbotInput.addEventListener('keypress', async (e) => {
+        if (e.key === 'Enter' && chatbotInput.value.trim() !== '') {
+            const userMessage = chatbotInput.value;
+            appendMessage(userMessage, 'user');
+            chatbotInput.value = '';
+            
+            const botMessage = document.createElement('div');
+            botMessage.className = 'message bot-message';
+            botMessage.textContent = 'Réflexion...';
+            chatbotMessages.appendChild(botMessage);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+            const prompt = `Réponds à la question suivante concernant l'installation de pompes à chaleur, les aides de l'État pour la rénovation énergétique, les économies possibles ou le processus d'éligibilité. Si la question n'est pas pertinente, réponds poliment que tu es spécialisé dans les pompes à chaleur et les aides à la rénovation. Question : "${userMessage}"`;
+            const response = await callGeminiAPI(prompt);
+            
+            botMessage.textContent = response;
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+    });
+
+    function appendMessage(text, sender) {
+        const messageElement = document.createElement('div');
+        messageElement.className = `message ${sender}-message`;
+        messageElement.textContent = text;
+        chatbotMessages.appendChild(messageElement);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    document.getElementById('lead-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Envoi en cours...';
+
+        const leadData = {
+            firstName: document.getElementById('first-name').value,
+            lastName: document.getElementById('last-name').value,
+            email: document.getElementById('email').value,
+            address: document.getElementById('address').value, // <-- New line added
+            phone: document.getElementById('phone').value,
+            ...selectedData,
+            createdAt: serverTimestamp()
+        };
+
+        try {
+            const collectionPath = `artifacts/${appId}/users/${userId}/leads`;
+            await addDoc(collection(db, collectionPath), leadData);
+            document.getElementById('contact-form-container').classList.add('hidden');
+            document.getElementById('success-message').classList.remove('hidden');
+        } catch (error) {
+            console.error("Erreur lors de l'enregistrement du lead: ", error);
+            showCustomAlert("Une erreur est survenue. Veuillez réessayer.");
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Envoyer et être recontacté';
+        }
+    });
+    
+    function showCustomAlert(message) {
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 2000;
+            text-align: center;
+            max-width: 90%;
+        `;
+        
+        const p = document.createElement('p');
+        p.textContent = message;
+        p.style.marginBottom = '1rem';
+        
+        const button = document.createElement('button');
+        button.textContent = 'OK';
+        button.style.cssText = `
+            background-color: #0666E1;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        `;
+        button.onclick = () => document.body.removeChild(modal);
+        
+        modal.appendChild(p);
+        modal.appendChild(button);
+        document.body.appendChild(modal);
+    }
+
+    // FAQ Accordion Logic
+    document.querySelectorAll('.faq-question').forEach(button => {
+        button.addEventListener('click', () => {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector('.faq-icon');
+
+            // Close all other open answers
+            document.querySelectorAll('.faq-answer.open').forEach(openAnswer => {
+                if (openAnswer !== answer) {
+                    openAnswer.classList.remove('open');
+                    openAnswer.previousElementSibling.querySelector('.faq-icon').classList.remove('rotate');
+                }
+            });
+
+            // Toggle the clicked answer
+            answer.classList.toggle('open');
+            icon.classList.toggle('rotate');
+        });
+    });
+</script>
+
+</body>
+</html>
