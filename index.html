@@ -33,62 +33,6 @@
         .step-btn:not(.btn-selected) {
             @apply bg-white text-gray-800;
         }
-        .chatbot-container {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 1000;
-            width: 350px;
-            height: 500px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            border-radius: 1rem;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            background-color: white;
-        }
-        #chatbot-toggle {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #0666E1;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s ease-in-out;
-            z-index: 1001;
-        }
-        #chatbot-toggle:hover {
-            transform: scale(1.1);
-        }
-        #chatbot-messages {
-            flex-grow: 1;
-            padding: 1rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        .message {
-            max-width: 80%;
-            padding: 0.75rem;
-            border-radius: 0.75rem;
-        }
-        .user-message {
-            background-color: #E5E7EB;
-            align-self: flex-end;
-        }
-        .bot-message {
-            background-color: #EBF5FF;
-            align-self: flex-start;
-        }
         /* Style for FAQ Accordion */
         .faq-item {
             border: 1px solid #E5E7EB;
@@ -97,7 +41,7 @@
             overflow: hidden;
         }
         .faq-question {
-            width: 0%;
+            width: 100%; /* Fixed: ensures full width for the button */
             padding: 1rem 1.5rem;
             text-align: left;
             font-weight: 600;
@@ -254,7 +198,7 @@
         <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-100">
             <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
                 <div class="rounded-lg shadow-xl overflow-hidden">
-                    <img src="https://calculezvosaides.fr/static/media/family3.451b4ca7db46bc47b023.jpg" alt="Une famille souriante dans un logement rénové" class="w-full h-auto object-cover">
+                    
                 </div>
                 <div class="text-center lg:text-left">
                     <h2 class="text-3xl font-bold text-gray-800 mb-4">Particuliers : Financez vos travaux grâce aux aides disponibles</h2>
@@ -344,11 +288,11 @@
                             <input type="text" id="zip-code" class="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: 75001" maxlength="5" inputmode="numeric">
                         </div>
                         <h3 class="text-xl font-semibold mb-6 text-gray-800">2. Quel est votre type de logement ?</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <button data-step="1" data-value="maison" data-next-step="2" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" data-button-group="housingType">
+                            <button data-step="1" data-value="maison" data-next-step="2" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 Maison
                             </button>
-                            <button data-step="1" data-value="appartement" data-next-step="2" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            <button data-step="1" data-value="appartement" data-next-step="2" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 Appartement
                             </button>
                         </div>
@@ -357,14 +301,14 @@
                     <!-- Étape 2 : Statut de l'occupant -->
                     <div id="step-2" class="simulation-step step-hidden">
                         <h3 class="text-xl font-semibold mb-6 text-gray-800">3. Quel est votre statut ?</h3>
-                        <div class="grid grid-cols-1 gap-4">
-                            <button data-step="2" data-value="propriétaire-occupant" data-next-step="3" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                        <div class="grid grid-cols-1 gap-4" data-button-group="occupantStatus">
+                            <button data-step="2" data-value="propriétaire-occupant" data-next-step="3" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 Propriétaire occupant
                             </button>
-                            <button data-step="2" data-value="propriétaire-bailleur" data-next-step="3" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            <button data-step="2" data-value="propriétaire-bailleur" data-next-step="3" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 Propriétaire bailleur
                             </button>
-                            <button data-step="2" data-value="locataire" data-next-step="3" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            <button data-step="2" data-value="locataire" data-next-step="3" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 Locataire
                             </button>
                         </div>
@@ -374,17 +318,17 @@
                     <!-- Étape 3 : Système de chauffage -->
                     <div id="step-3" class="simulation-step step-hidden">
                         <h3 class="text-xl font-semibold mb-6 text-gray-800">4. Quel est votre système de chauffage actuel ?</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <button data-step="3" data-value="fioul" data-next-step="4" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" data-button-group="heatingSystem">
+                            <button data-step="3" data-value="fioul" data-next-step="4" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 Chaudière au fioul
                             </button>
-                            <button data-step="3" data-value="gaz" data-next-step="4" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            <button data-step="3" data-value="gaz" data-next-step="4" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 Chaudière au gaz
                             </button>
-                            <button data-step="3" data-value="electrique" data-next-step="4" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            <button data-step="3" data-value="electrique" data-next-step="4" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 Chauffage électrique
                             </button>
-                            <button data-step="3" data-value="autre" data-next-step="4" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            <button data-step="3" data-value="autre" data-next-step="4" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 Autre
                             </button>
                         </div>
@@ -394,29 +338,29 @@
                     <!-- Étape 4 : Eau chaude et surface -->
                     <div id="step-4" class="simulation-step step-hidden">
                         <h3 class="text-xl font-semibold mb-6 text-gray-800">5. Votre système de chauffage produit-il également de l'eau chaude sanitaire ?</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            <button data-step="4-ecs" data-value="oui-ecs" data-next-step="5" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6" data-button-group="hotWater">
+                            <button data-step="4-ecs" data-value="oui-ecs" data-next-step="5" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 Oui
                             </button>
-                            <button data-step="4-ecs" data-value="non-ecs" data-next-step="5" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            <button data-step="4-ecs" data-value="non-ecs" data-next-step="5" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 Non
                             </button>
                         </div>
                         <h3 class="text-xl font-semibold mb-6 text-gray-800">6. Quelle est la surface à chauffer ?</h3>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                            <button data-step="4-surface" data-value="-70" data-next-step="5" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4" data-button-group="surface">
+                            <button data-step="4-surface" data-value="-70" data-next-step="5" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 - 70 m²
                             </button>
-                            <button data-step="4-surface" data-value="70-90" data-next-step="5" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            <button data-step="4-surface" data-value="70-90" data-next-step="5" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 70 - 90 m²
                             </button>
-                            <button data-step="4-surface" data-value="90-110" data-next-step="5" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            <button data-step="4-surface" data-value="90-110" data-next-step="5" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 90 - 110 m²
                             </button>
-                            <button data-step="4-surface" data-value="110-130" data-next-step="5" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            <button data-step="4-surface" data-value="110-130" data-next-step="5" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 110 - 130 m²
                             </button>
-                            <button data-step="4-surface" data-value="+130" data-next-step="5" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            <button data-step="4-surface" data-value="+130" data-next-step="5" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 + 130 m²
                             </button>
                         </div>
@@ -426,14 +370,14 @@
                     <!-- Étape 5 : Émetteurs de chauffage -->
                     <div id="step-5" class="simulation-step step-hidden">
                         <h3 class="text-xl font-semibold mb-6 text-gray-800">7. Quel est votre type d'émetteur de chauffage ?</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <button data-step="5" data-value="radiateur" data-next-step="6" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4" data-button-group="emitterType">
+                            <button data-step="5" data-value="radiateur" data-next-step="6" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 Radiateur
                             </button>
-                            <button data-step="5" data-value="plancher-chauffant" data-next-step="6" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            <button data-step="5" data-value="plancher-chauffant" data-next-step="6" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 Plancher chauffant
                             </button>
-                            <button data-step="5" data-value="les-deux" data-next-step="6" class="step-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
+                            <button data-step="5" data-value="les-deux" data-next-step="6" class="step-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">
                                 Les deux
                             </button>
                         </div>
@@ -443,16 +387,16 @@
                     <!-- Étape 6 : Foyer et revenus -->
                     <div id="step-6" class="simulation-step step-hidden">
                         <h3 class="text-xl font-semibold mb-6 text-gray-800">8. Combien de personnes composent votre foyer ?</h3>
-                        <div class="grid grid-cols-3 md:grid-cols-6 gap-4 mb-6">
-                            <button data-value="1" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">1</button>
-                            <button data-value="2" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">2</button>
-                            <button data-value="3" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">3</button>
-                            <button data-value="4" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">4</button>
-                            <button data-value="5" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">5</button>
-                            <button data-value="6+" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">6+</button>
+                        <div class="grid grid-cols-3 md:grid-cols-6 gap-4 mb-6" data-button-group="household">
+                            <button data-value="1" data-step="household" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">1</button>
+                            <button data-value="2" data-step="household" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">2</button>
+                            <button data-value="3" data-step="household" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">3</button>
+                            <button data-value="4" data-step="household" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">4</button>
+                            <button data-value="5" data-step="household" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">5</button>
+                            <button data-value="6+" data-step="household" class="household-size-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300">6+</button>
                         </div>
                         <h3 class="text-xl font-semibold mb-6 text-gray-800">9. Quel est votre revenu fiscal de référence ?</h3>
-                        <div id="income-buttons-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                        <div id="income-buttons-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8" data-button-group="income">
                             <p class="text-gray-500 col-span-full">Veuillez d'abord sélectionner la taille de votre foyer.</p>
                         </div>
                         <button id="check-eligibility-btn" class="w-full bg-gray-400 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 cursor-not-allowed" disabled>
@@ -523,50 +467,13 @@
         </section>
     </main>
 
-    <!-- Chatbot Container -->
-    <div id="chatbot-container" class="hidden chatbot-container">
-        <div class="flex-shrink-0 bg-blue-600 text-white p-4 flex justify-between items-center rounded-t-lg">
-            <h3 class="text-lg font-bold">Assistant Pompe à Chaleur</h3>
-            <button id="close-chatbot" class="text-xl">&times;</button>
-        </div>
-        <div id="chatbot-messages"></div>
-        <div class="flex-shrink-0 p-4 border-t border-gray-200">
-            <input type="text" id="chatbot-input" class="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Posez votre question...">
-        </div>
-    </div>
-    <button id="chatbot-toggle">💬</button>
-
     <footer class="bg-gray-800 text-white py-8 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto text-center text-sm text-gray-400">
             <p>&copy; 2025 C ECOLO. Tous droits réservés.</p>
         </div>
     </footer>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
-        let userId = null;
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                userId = user.uid;
-            } else {
-                try {
-                    const userCredential = await signInAnonymously(auth);
-                    userId = userCredential.user.uid;
-                } catch (error) {
-                    console.error("Erreur de connexion anonyme:", error);
-                }
-            }
-        });
-
+    <script>
         const ELIGIBILITY_CRITERIA = {
             "default": {
                 "1": { "Très modeste": "<17009", "Modeste": "<21805", "Intermédiaire": "<30549" },
@@ -617,12 +524,23 @@
             }
         }
 
-        document.querySelectorAll('.step-btn').forEach(button => {
+        // Centralized event listener for all choice buttons
+        document.querySelectorAll('.choice-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const currentStep = button.dataset.step;
                 const nextStep = parseInt(button.dataset.nextStep);
                 const value = button.dataset.value;
+                const buttonGroup = button.closest('[data-button-group]');
 
+                // Remove selection from all buttons in the same group
+                if (buttonGroup) {
+                    buttonGroup.querySelectorAll('.choice-btn').forEach(btn => btn.classList.remove('btn-selected'));
+                }
+                
+                // Add selection to the clicked button
+                button.classList.add('btn-selected');
+
+                // Update selected data based on the button's type
                 if (currentStep === '1') {
                     const zipCodeInput = document.getElementById('zip-code');
                     if (!/^\d{5}$/.test(zipCodeInput.value)) {
@@ -631,33 +549,34 @@
                     }
                     selectedData.zipCode = zipCodeInput.value;
                     selectedData.housingType = value;
+                    setTimeout(() => switchStep(nextStep), 200);
                 } else if (currentStep === '2') {
                     selectedData.occupantStatus = value;
+                    setTimeout(() => switchStep(nextStep), 200);
                 } else if (currentStep === '3') {
                     selectedData.heatingSystem = value;
-                } else if (currentStep === '4-ecs') {
-                    selectedData.producesHotWater = value;
-                } else if (currentStep === '4-surface') {
-                    selectedData.heatedSurfaceArea = value;
-                } else if (currentStep === '5') {
-                    selectedData.emitterType = value;
-                }
-                
-                // Remove selection from siblings for single-choice steps
-                if (currentStep === '1' || currentStep === '2' || currentStep === '3' || currentStep === '5') {
-                    button.parentElement.querySelectorAll('.step-btn').forEach(btn => btn.classList.remove('btn-selected'));
-                    button.classList.add('btn-selected');
                     setTimeout(() => switchStep(nextStep), 200);
-                } else if (currentStep.startsWith('4-')) { // Handle specific logic for step 4 to allow multiple sections
-                    const parentElement = button.parentElement;
-                    parentElement.querySelectorAll('.step-btn').forEach(btn => btn.classList.remove('btn-selected'));
-                    button.classList.add('btn-selected');
-
+                } else if (currentStep.startsWith('4-')) {
+                    if (currentStep === '4-ecs') {
+                        selectedData.producesHotWater = value;
+                    } else if (currentStep === '4-surface') {
+                        selectedData.heatedSurfaceArea = value;
+                    }
                     const ecsSelected = document.querySelector('[data-step="4-ecs"].btn-selected');
                     const surfaceSelected = document.querySelector('[data-step="4-surface"].btn-selected');
                     if (ecsSelected && surfaceSelected) {
                         setTimeout(() => switchStep(nextStep), 200);
                     }
+                } else if (currentStep === '5') {
+                    selectedData.emitterType = value;
+                    setTimeout(() => switchStep(nextStep), 200);
+                } else if (currentStep === 'household') {
+                    selectedData.householdSize = value;
+                    generateIncomeButtons();
+                    checkEligibilityButtonState();
+                } else if (currentStep === 'income') {
+                    selectedData.incomeBracket = value;
+                    checkEligibilityButtonState();
                 }
             });
         });
@@ -666,16 +585,6 @@
             button.addEventListener('click', () => {
                 const prevStep = parseInt(button.dataset.prevStep);
                 switchStep(prevStep);
-            });
-        });
-
-        document.querySelectorAll('.household-size-btn').forEach(button => {
-            button.addEventListener('click', (e) => {
-                selectedData.householdSize = e.target.dataset.value;
-                document.querySelectorAll('.household-size-btn').forEach(btn => btn.classList.remove('btn-selected'));
-                e.target.classList.add('btn-selected');
-                generateIncomeButtons();
-                checkEligibilityButtonState();
             });
         });
 
@@ -692,14 +601,22 @@
                 Object.entries(sizeCriteria).forEach(([bracket, value]) => {
                     const btn = document.createElement('button');
                     btn.className = "income-btn choice-btn w-full bg-white hover:bg-blue-100 border border-gray-300 font-medium py-4 rounded-lg transition duration-300";
+                    btn.dataset.step = "income";
                     btn.dataset.value = bracket;
                     btn.textContent = `${bracket} (${value}€)`;
-                    btn.onclick = (e) => {
-                        selectedData.incomeBracket = e.target.dataset.value;
-                        document.querySelectorAll('.income-btn').forEach(b => b.classList.remove('btn-selected'));
-                        e.target.classList.add('btn-selected');
+                    
+                    // Attach event listener
+                    btn.addEventListener('click', function() {
+                        const buttonGroup = this.closest('[data-button-group]');
+                        if (buttonGroup) {
+                            buttonGroup.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('btn-selected'));
+                        }
+                        this.classList.add('btn-selected');
+
+                        selectedData.incomeBracket = this.dataset.value;
                         checkEligibilityButtonState();
-                    };
+                    });
+
                     container.appendChild(btn);
                 });
             }
@@ -741,99 +658,10 @@
             document.getElementById('contact-form-container').classList.remove('hidden');
         });
         
-        // Gemini API logic
-        const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=";
-        const apiKey = "";
-        
-        async function callGeminiAPI(prompt) {
-            try {
-                const payload = {
-                    contents: [{ parts: [{ text: prompt }] }],
-                };
-                const response = await fetch(GEMINI_API_URL + apiKey, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                const result = await response.json();
-                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                return text || "Désolé, je n'ai pas pu générer de réponse.";
-            } catch (error) {
-                console.error("Erreur lors de l'appel à l'API Gemini:", error);
-                return "Une erreur est survenue lors de la connexion à l'API.";
-            }
-        }
-        
-        // Chatbot logic
-        const chatbotToggle = document.getElementById('chatbot-toggle');
-        const chatbotContainer = document.getElementById('chatbot-container');
-        const chatbotClose = document.getElementById('close-chatbot');
-        const chatbotMessages = document.getElementById('chatbot-messages');
-        const chatbotInput = document.getElementById('chatbot-input');
-
-        chatbotToggle.addEventListener('click', () => {
-            chatbotContainer.classList.toggle('hidden');
-        });
-
-        chatbotClose.addEventListener('click', () => {
-            chatbotContainer.classList.add('hidden');
-        });
-
-        chatbotInput.addEventListener('keypress', async (e) => {
-            if (e.key === 'Enter' && chatbotInput.value.trim() !== '') {
-                const userMessage = chatbotInput.value;
-                appendMessage(userMessage, 'user');
-                chatbotInput.value = '';
-                
-                const botMessage = document.createElement('div');
-                botMessage.className = 'message bot-message';
-                botMessage.textContent = 'Réflexion...';
-                chatbotMessages.appendChild(botMessage);
-                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-
-                const prompt = `Réponds à la question suivante concernant l'installation de pompes à chaleur, les aides de l'État pour la rénovation énergétique, les économies possibles ou le processus d'éligibilité. Si la question n'est pas pertinente, réponds poliment que tu es spécialisé dans les pompes à chaleur et les aides à la rénovation. Question : "${userMessage}"`;
-                const response = await callGeminiAPI(prompt);
-                
-                botMessage.textContent = response;
-                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-            }
-        });
-
-        function appendMessage(text, sender) {
-            const messageElement = document.createElement('div');
-            messageElement.className = `message ${sender}-message`;
-            messageElement.textContent = text;
-            chatbotMessages.appendChild(messageElement);
-            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-        }
-
-        document.getElementById('lead-form').addEventListener('submit', async (e) => {
+        document.getElementById('lead-form').addEventListener('submit', (e) => {
             e.preventDefault();
-            const submitBtn = document.getElementById('submit-btn');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = 'Envoi en cours...';
-
-            const leadData = {
-                firstName: document.getElementById('first-name').value,
-                lastName: document.getElementById('last-name').value,
-                email: document.getElementById('email').value,
-                address: document.getElementById('address').value, // <-- New line added
-                phone: document.getElementById('phone').value,
-                ...selectedData,
-                createdAt: serverTimestamp()
-            };
-
-            try {
-                const collectionPath = `artifacts/${appId}/users/${userId}/leads`;
-                await addDoc(collection(db, collectionPath), leadData);
-                document.getElementById('contact-form-container').classList.add('hidden');
-                document.getElementById('success-message').classList.remove('hidden');
-            } catch (error) {
-                console.error("Erreur lors de l'enregistrement du lead: ", error);
-                showCustomAlert("Une erreur est survenue. Veuillez réessayer.");
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = 'Envoyer et être recontacté';
-            }
+            document.getElementById('contact-form-container').classList.add('hidden');
+            document.getElementById('success-message').classList.remove('hidden');
         });
         
         function showCustomAlert(message) {
@@ -894,3 +722,4 @@
     </script>
 </body>
 </html>
+
