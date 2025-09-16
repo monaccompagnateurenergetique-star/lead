@@ -411,7 +411,7 @@
                     <div id="result-icon" class="text-6xl mb-4"></div>
                     <div id="result-message" class="text-2xl font-bold mb-4"></div>
                     <p class="text-gray-600 mb-8">
-                        Pour valider votre projet et être recontacté, veuillez finaliser votre demande.
+                        Pour obtenir une étude personnalisée de vos aides et valider votre projet, veuillez finaliser votre demande.
                     </p>
                     <button id="show-contact-form-btn" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300">
                         Finaliser ma demande
@@ -645,8 +645,8 @@
                 resultMessage.innerHTML = `Félicitations ! Votre logement est éligible à la <span class="text-blue-600">pompe à chaleur à 990,00 €</span>.`;
                 resultIcon.textContent = '✅';
             } else {
-                resultMessage.innerHTML = `Malheureusement, vous n'êtes pas éligible à l'offre à 990,00 €. <br> Votre projet nécessite une étude personnalisée.`;
-                resultIcon.textContent = '❌';
+                resultMessage.innerHTML = `Votre projet nécessite une étude personnalisée par un de nos experts pour évaluer toutes vos aides disponibles.`;
+                resultIcon.textContent = '🔍';
             }
 
             document.getElementById('simulation-container').classList.add('hidden');
@@ -722,4 +722,3 @@
     </script>
 </body>
 </html>
-
